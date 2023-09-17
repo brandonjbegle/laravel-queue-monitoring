@@ -21,7 +21,7 @@ class SlowQueueCheck extends Command
      *
      * @var string
      */
-    protected $description = 'Poll queue for age of oldest job.';
+    protected $description = 'Monitoring queue timing.';
 
     /**
      * Execute the console command.
