@@ -24,8 +24,8 @@ QUEUE_MONITORING_EMAILS=test@email.com,email2@email.com
 ### Scheduled Command
 Add the command to your app\Console\Kernel.php
 
-```
-queue-monitoring:slow-queue {seconds}
+```php
+$schedule->command('queue-monitoring:slow-queue {seconds}')->everyMinute();
 ```
 
 ### Optional Configuration
