@@ -37,7 +37,7 @@ class SlowQueueCheck extends Command
 
         $timestamp = Cache::get('laravel-queue-monitoring:slow-queue-check');
         if($timestamp){
-            $time = Carbon::parse($timestamp);
+            $time = Carbon::createFromTimestamp($timestamp);
 
             if(now()->diffInSeconds($time) > $this->argument('seconds')){
                 $this->info('Dispatching Event');
