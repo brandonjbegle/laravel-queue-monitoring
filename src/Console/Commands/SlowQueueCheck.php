@@ -40,14 +40,18 @@ class SlowQueueCheck extends Command
         if($timestamp){
             $time = Carbon::createFromTimestamp($timestamp);
 
-            if(now()->diffInSeconds($time) > $this->argument('seconds')){
+            $seconds = $this->argument('seconds');
+            $greaterThanPeriod = now()->diffInSeconds($time) > $seconds;
+            $notGreaterThanTwoPeriods = now()->diffInSeconds($time) < ($seconds * 2);
+
+            if($greaterThanPeriod && $notGreaterThanTwoPeriods){
                 $this->info('Dispatching Event');
                 event(new SlowQueueEvent($this->argument('seconds')));
             }
+        }else{
+            Cache::put('laravel-queue-monitoring:slow-queue-check', now()->timestamp);
+            dispatch(new SlowQueryCheckJob());
         }
-
-        Cache::put('laravel-queue-monitoring:slow-queue-check', now()->timestamp);
-        dispatch(new SlowQueryCheckJob());
 
         return Command::SUCCESS;
     }
