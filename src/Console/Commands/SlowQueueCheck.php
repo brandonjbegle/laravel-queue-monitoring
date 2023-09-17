@@ -3,6 +3,7 @@
 namespace BrandonJBegle\LaravelQueueMonitoring\Console\Commands;
 
 use BrandonJBegle\LaravelQueueMonitoring\Events\SlowQueueEvent;
+use BrandonJBegle\LaravelQueueMonitoring\Jobs\SlowQueryCheckJob;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -21,7 +22,7 @@ class SlowQueueCheck extends Command
      *
      * @var string
      */
-    protected $description = 'Poll queue for age of oldest job.';
+    protected $description = 'Monitoring queue timing.';
 
     /**
      * Execute the console command.
@@ -45,9 +46,8 @@ class SlowQueueCheck extends Command
             }
         }
 
-
         Cache::put('laravel-queue-monitoring:slow-queue-check', now()->timestamp);
-
+        dispatch(new SlowQueryCheckJob());
 
         return Command::SUCCESS;
     }
