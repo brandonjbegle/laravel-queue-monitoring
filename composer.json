@@ -1,0 +1,31 @@
+{
+  "name": "brandonjbegle/laravel-queue-monitoring",
+  "description": "Alerts for queues.",
+  "keywords": [
+    "laravel",
+    "notifications",
+    "queues"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^8.0",
+    "laravel/framework": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "BrandonJBegle\\LaravelQueueMonitoring\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "BrandonJBegle\\LaravelQueueMonitoring\\LaravelQueueMonitoringServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
