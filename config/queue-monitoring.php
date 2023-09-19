@@ -2,5 +2,5 @@
 
 return [
     'disable-default-alerts' => false,
-    'alert-email-addresses'  => explode(',', env('QUEUE_MONITORING_EMAILS'))
+    'alert-email-addresses'  => array_filter(explode(',', trim(env('QUEUE_MONITORING_EMAILS'))))
 ];
